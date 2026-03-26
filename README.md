@@ -18,9 +18,9 @@ A modelagem física (`projeto_banco.sql`) estruturou a tabela `eventos` com `SER
 O sitemap é direto: `Início -> Listagem de Eventos -> Formulário de Evento (Criar/Editar)`.
 
 * **Tela Inicial / Listagem:**
-  ![Insira a imagem ou link do protótipo aqui]
+  ![]
 * **Tela de Cadastro / Edição:**
-  ![Insira a imagem ou link do protótipo aqui]
+  ![]
 
 ## v) Instruções de Execução
 No terminal, a partir da raiz do projeto, execute o módulo principal que demonstrará o funcionamento do CRUD em memória:
