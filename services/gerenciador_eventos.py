@@ -7,14 +7,10 @@ class GerenciadorEventos:
     """Responsável por orquestrar as regras de negócio (Camada de Serviço)."""
     
     def __init__(self, repository: EventoRepository) -> None:
-        # Injeção de dependência do repositório
         self._repository = repository
 
     def cadastrar_evento(self, nome: str, data: datetime, local: str, descricao: str) -> Evento:
-        novo_id = self._repository.gerar_id()
-        evento = Evento(novo_id, nome, data, local, descricao)
-        self._repository.salvar(evento)
-        return evento
+        return self._repository.salvar(nome, data, local, descricao)
 
     def listar_eventos(self) -> List[Evento]:
         return self._repository.buscar_todos()
@@ -27,14 +23,14 @@ class GerenciadorEventos:
         if not evento:
             return False
         
-        # Atualiza os dados se eles foram fornecidos
+        # Atualiza o objeto em memória
         if nome: evento.nome = nome
         if data: evento.data = data
         if local: evento.local = local
         if descricao: evento.descricao = descricao
         
-        # Em um banco de dados real, chamaríamos o repository.salvar(evento) aqui
-        return True
+        # Persiste a alteração no banco de dados
+        return self._repository.atualizar(evento)
 
     def remover_evento(self, id_evento: int) -> bool:
         return self._repository.deletar(id_evento)
