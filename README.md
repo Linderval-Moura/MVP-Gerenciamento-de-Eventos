@@ -2,7 +2,7 @@
 
 ## i) Descrição do Projeto
 Este projeto é um Produto Mínimo Viável (MVP) desenvolvido para o gerenciamento do ciclo de vida de eventos. O sistema foi construído aplicando princípios de arquitetura de software limpa, separação de responsabilidades em camadas e persistência de dados.
-**Tecnologias:** Python 3 (Backend), PostgreSQL (Modelagem Física) e HTML/CSS (Wireframing).
+**Tecnologias:** Python 3 (Backend), PostgreSQL (Modelagem Física) e Figma (Wireframing).
 
 ## ii) Explicação das Classes e Arquitetura
 O código segue uma arquitetura baseada em camadas para garantir modularidade:
