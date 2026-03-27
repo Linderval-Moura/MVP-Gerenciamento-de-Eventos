@@ -11,18 +11,26 @@ O código segue uma arquitetura baseada em camadas para garantir modularidade:
 * **`services.GerenciadorEventos`**: Atua como a camada de negócio. Orquestra a criação, leitura, atualização e deleção (CRUD), conectando os inputs à camada de persistência.
 
 ## iii) Projeto Físico do Banco de Dados
-A modelagem física (`projeto_banco.sql`) estruturou a tabela `eventos` com `SERIAL PRIMARY KEY` para IDs únicos e tipos adequados (`VARCHAR`, `TIMESTAMP`, `TEXT`). 
+A modelagem física (`projeto_banco.sql`) estruturou a tabela `eventos` contendo as seguintes colunas e tipos: `id` (`SERIAL PRIMARY KEY` para IDs únicos), `nome` e `local` (`VARCHAR`), `data` (`TIMESTAMP` para precisão de data e hora) e `descricao` (`TEXT` para blocos maiores de informação).
+
 **Justificativa de Índice:** Foi adicionado um `INDEX` na coluna `data`. Como sistemas de eventos lidam com cronologia constante (listar eventos do dia, eventos futuros), este índice otimiza o *query plan* do banco, acelerando as buscas por datas.
 
 ## iv) Wireframe e Sitemap
-O sitemap é direto: `Início -> Listagem de Eventos -> Formulário de Evento (Criar/Editar)`.
+O fluxo de navegação do usuário foi desenhado para ser intuitivo e direto, possuindo quatro telas principais:
+`Tela Inicial` ➔ `Listagem de Eventos` ➔ `Cadastro de Eventos` ou `Edição de Evento`.
 
-* **Tela Inicial / Listagem:**
-  ![]
-* **Tela de Cadastro / Edição:**
-  ![]
+Abaixo, segue a interface projetada (protótipo) contemplando todas as telas exigidas:
+
+![Wireframes do Sistema de Gerenciamento de Eventos](wireframes.png)
+
+* **Tela Inicial:** Apresenta uma mensagem de boas-vindas e botões de acesso rápido para ver os eventos ou criar um novo.
+* **Tela de Listagem (Meus Eventos):** Exibe os eventos cadastrados em formato de cards com informações resumidas (nome, data e local) e links diretos para Editar ou Excluir.
+* **Tela de Cadastro (Novo Evento):** Formulário limpo para inserção de dados, contendo campos de texto, data/hora e área de descrição.
+* **Tela de Edição:** Reaproveitamento do layout de cadastro, porém com os campos preenchidos com os dados atuais do evento e o botão de "Atualizar".
 
 ## v) Instruções de Execução
-No terminal, a partir da raiz do projeto, execute o módulo principal que demonstrará o funcionamento do CRUD em memória:
-```bash
-python main.py
+1. Certifique-se de ter o PostgreSQL rodando localmente.
+2. Crie um banco de dados e rode o script `projeto_banco.sql` para criar a tabela.
+3. Instale a dependência de conexão com o banco executando: `pip install psycopg2-binary`
+4. Atualize as credenciais do banco no arquivo `main.py` (variável DB_CONFIG).
+5. Execute o sistema com: `python main.py`
